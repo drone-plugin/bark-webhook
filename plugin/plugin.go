@@ -33,7 +33,7 @@ type requestBody struct {
 func sendCard(status string, repoName string, repoLink string, commit string, build string) {
 	webhookUrl := os.Getenv("PLUGIN_WEBHOOK")
 	contentType := "application/json"
-	reqBody := requestBody{repoName + "Build" + status, "", "https://cdn.orluma.ltd/midway/drone.png", "Drone"}
+	reqBody := requestBody{repoName, "Build>>>" + status, "https://cdn.orluma.ltd/midway/drone.png", "Drone"}
 	req, _ := json.Marshal(reqBody)
 	resp, err := http.Post(webhookUrl, contentType, bytes.NewBuffer(req))
 	if err != nil {
