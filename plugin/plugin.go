@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/drone/drone-go/plugin/webhook"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -35,6 +36,7 @@ func sendCard(status string, repoName string, repoLink string, commit string, bu
 	contentType := "application/json"
 	reqBody := requestBody{repoName, "Build>>>" + status, "https://cdn.zzfzzf.com/midway/drone.png", "Drone"}
 	req, _ := json.Marshal(reqBody)
+	log.Printf(webhookUrl)
 	resp, err := http.Post(webhookUrl, contentType, bytes.NewBuffer(req))
 	if err != nil {
 		panic(err)
