@@ -7,16 +7,18 @@ steps:
     commands:
       - go env -w GOPROXY=https://goproxy.cn,direct
       - GOOS=linux GOARCH=amd64 go build -o drone-webhook
-  - name: publish
+  - name: build docker file and publish
     depends_on:
-      - build
+      - clone
     image: plugins/docker
     pull: if-not-exists
     settings:
-      registry: registry.cn-shanghai.aliyuncs.com
+      registry: hub.ooxo.cc
       username:
-        from_secret: docker_username
+        from_secret: nexus_docker_username
       password:
-        from_secret: docker_password
-      repo: registry.cn-shanghai.aliyuncs.com/zzf2001/bark-webhook
-      tags: latest
+        from_secret: nexus_docker_password
+      repo: hub.ooxo.cc/home/bark-webhook
+      tags:
+        - ${DRONE_COMMIT_SHA:0:8}
+        - latest
