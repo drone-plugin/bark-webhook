@@ -10,7 +10,7 @@ steps:
   - name: build docker file and publish
     depends_on:
       - build
-    image: plugins/docker
+    image: plugins/docker:20.17
     pull: if-not-exists
     settings:
       registry: hub.ooxo.cc
