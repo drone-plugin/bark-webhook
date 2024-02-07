@@ -9,7 +9,7 @@ steps:
       - GOOS=linux GOARCH=amd64 go build -o main
   - name: build docker file and publish
     depends_on:
-      - clone
+      - build
     image: plugins/docker
     pull: if-not-exists
     settings:
